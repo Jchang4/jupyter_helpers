@@ -23,7 +23,7 @@ class ToDeviceCallback(Callback):
         self.learn.yb = tuple(yb.to(device) for yb in self.learn.yb)
 
 
-class gpu_mem_restore_ctx:
+class safely_train_with_gpu:
     "context manager to reclaim GPU RAM if CUDA out of memory happened, or execution was interrupted"
 
     def __enter__(self):
