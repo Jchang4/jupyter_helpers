@@ -11,7 +11,7 @@ def create_github_sshkey_on_machine(
     Host *.github.com
     AddKeysToAgent yes
     IdentityFile ~/.ssh/id_ed25519
-    """
+    """.strip()
 
     # if ssh_directory:
     #     ssh_directory = ssh_directory.replace("~", os.path.expanduser("~"))
@@ -20,10 +20,9 @@ def create_github_sshkey_on_machine(
     os.system(
         f'ssh-keygen -q -t ed25519 -N "" -f {ssh_directory}/id_ed25519 -C "{github_email}" <<< y'
     )
+    os.system(f"chmod 700 {ssh_directory}/id_ed25519")
     os.system('eval "$(ssh-agent -s)"')
     os.system(f"touch {ssh_directory}/config")
-    os.system(f"cat {ssh_directory}/config")
-    print(ssh_directory / "config")
 
     with open(f"{ssh_directory}/config", "r") as f:
         ssh_config = f.read()
