@@ -22,7 +22,7 @@ def clean_ipython_hist():
     hm._i = hm._ii = hm._iii = hm._i00 = ""
 
 
-def clean_tb():
+def clean_traceback():
     # h/t Piotr Czapla
     if hasattr(sys, "last_traceback"):
         traceback.clear_frames(sys.last_traceback)
@@ -33,9 +33,8 @@ def clean_tb():
         delattr(sys, "last_value")
 
 
-def clean_mem():
-    clean_tb()
+def clean_memory():
+    clean_traceback()
     clean_ipython_hist()
     gc.collect()
     torch.cuda.empty_cache()
-

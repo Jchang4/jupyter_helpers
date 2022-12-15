@@ -3,7 +3,7 @@ import traceback
 import torch
 from fastai.callback.all import Callback
 
-from gpu_memory import clean_mem
+from .gpu_memory import clean_memory
 
 device = torch.device(
     "mps"
@@ -33,5 +33,5 @@ class safely_train_with_gpu:
         if not exc_val:
             return True
         traceback.clear_frames(exc_tb)
-        clean_mem()
+        clean_memory()
         raise exc_type(exc_val).with_traceback(exc_tb) from None
