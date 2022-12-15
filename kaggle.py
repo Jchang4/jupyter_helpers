@@ -33,10 +33,10 @@ def create_submission(
     assert hasattr(df, id_col), f"Dataframe missing column: {id_col}"
     assert hasattr(df, label_col), f"Dataframe missing column: {label_col}"
 
-    submission = submission.sort_values(id_col)
-    submission.to_csv(output_file, index=False)
+    df = df.sort_values(id_col)
+    df.to_csv(output_file, index=False)
 
     if should_submit:
         kaggle.api.competition_submit(output_file, submission_message, competition_name)
 
-    return submission
+    return df
