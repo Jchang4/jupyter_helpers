@@ -3,7 +3,7 @@ import traceback
 import torch
 from fastai.callback.all import Callback
 
-from gpu_memory import clean_memory
+from .gpu_memory import clean_memory
 
 device = torch.device(
     "mps"
