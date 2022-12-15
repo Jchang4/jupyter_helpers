@@ -1,9 +1,9 @@
+import os
 import zipfile
 from pathlib import Path
 
-import pandas as pd
-
 import kaggle
+import pandas as pd
 
 
 def download_data(
@@ -17,6 +17,8 @@ def download_data(
     if unzip:
         with zipfile.ZipFile(path / f"{competition_name}.zip", "r") as zip_ref:
             zip_ref.extractall(path)
+
+    os.system(f"du -h {path}")
 
 
 def create_submission(
